@@ -65,23 +65,6 @@ Portal Progressive Web App (PWA) do Condomínio Paraíso Bio com informações, 
 2. Clique no ícone de instalação na barra de endereços
 3. Ou use o botão "Instalar App" na página
 
-## 🐛 Resolução de problemas
-
-### Service Worker não carrega:
-- Verifique se está acessando via HTTPS ou localhost
-- Limpe o cache do navegador
-- Verifique o console para erros
-
-### App não instala:
-- Certifique-se que o manifest.json está carregando corretamente
-- Verifique se os ícones existem e estão no tamanho correto
-- Use um servidor HTTP (não arquivo local)
-
-### Não funciona offline:
-- Verifique se o Service Worker está ativo
-- Confirme que os arquivos estão sendo cached
-- Recarregue a página online primeiro
-
 ## 👨‍💻 Desenvolvedor
 
 **Matheus Bonotto** - squidev  
