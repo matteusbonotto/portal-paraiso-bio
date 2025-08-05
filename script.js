@@ -10,6 +10,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const toast = new bootstrap.Toast(toastDica, { delay: 7000 });
             toast.show();
         }
+        // Toast de divulgação
+        const toastDivulgacao = document.getElementById('toast-divulgacao');
+        if (toastDivulgacao) {
+            setTimeout(() => {
+                const toast = new bootstrap.Toast(toastDivulgacao, { delay: 12000 });
+                toast.show();
+            }, 3500);
+        }
     }, 1000);
 });
 
