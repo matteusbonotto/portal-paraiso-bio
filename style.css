@@ -183,10 +183,11 @@
     background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
     border: none;
     color: white;
-    padding: calc(var(--espacamento-base) * 2) calc(var(--espacamento-base) * 4);
     border-radius: calc(var(--espacamento-base) * 3);
     font-weight: 500;
     transition: all 0.3s ease;
+    width: 30%;
+    padding: calc(var(--espacamento-base) * 1.5) calc(var(--espacamento-base) * 3);
 }
 
 .botao-instalacao:hover {
@@ -196,6 +197,11 @@
 }
 
 @media (max-width: 768px) {
+    .botao-instalacao {
+        width: 100%;
+        padding: calc(var(--espacamento-base) * 1) calc(var(--espacamento-base) * 2);
+    }
+
     .secao-principal {
         padding: calc(var(--espacamento-base) * 2);
     }
