@@ -1,0 +1,134 @@
+{
+  "contatos": [
+    {
+      "nome": "Portaria",
+      "telefone": "(19)99258-5597",
+      "tipo": "portaria",
+      "prioridade": "alta"
+    },
+    {
+      "nome": "Síndico Ricardo",
+      "telefone": "(19)98289-0000",
+      "email": "ricardoimene@gmail.com",
+      "tipo": "sindico",
+      "prioridade": "alta"
+    },
+    {
+      "nome": "Zelador",
+      "telefone": "(19)98993-9419",
+      "tipo": "zeladoria",
+      "prioridade": "baixa"
+    },
+    {
+      "nome": "Subsíndica Paty",
+      "telefone": "(19)98812-4347",
+      "tipo": "subsindica",
+      "prioridade": "baixa"
+    },
+    {
+      "nome": "Zuma Daniel Cardoso",
+      "telefone": "(19)99816-0260",
+      "email": "daniel@zuma.eng.br",
+      "tipo": "engenharia",
+      "prioridade": "baixa"
+    },
+    {
+      "nome": "Juliana (Zuma)",
+      "email": "juliana@zuma.eng.br",
+      "tipo": "engenharia",
+      "prioridade": "baixa"
+    },
+    {
+      "nome": "Atendimento SC Condomínios",
+      "email": "atendimento@sccondominios.com",
+      "tipo": "administradora",
+      "prioridade": "baixa"
+    },
+    {
+      "nome": "Assistência Técnica",
+      "email": "assistencia.tecnica@zuma.eng.br",
+      "tipo": "assistencia",
+      "prioridade": "baixa"
+    }
+  ],
+  "grupos_whatsapp": [
+    {
+      "nome": "Grupo de Moradores",
+      "url": "https://chat.whatsapp.com/FVLO4DFmNgOD83GO3WMCrH",
+      "icone": "people"
+    }
+  ],
+  "enderecos": {
+    "condominio": {
+      "logradouro": "Rua Vandick Reidner P. Coqueiro",
+      "numero": "597",
+      "complemento": "Resi. Cosmos",
+      "cep": "13059-112"
+    },
+    "instalacoes": {
+      "logradouro": "R Osvaldo Orlando da Costa",
+      "numero": "203",
+      "complemento": "Resi. Cosmos",
+      "cep": "13059-091"
+    }
+  },
+  "links_uteis": [
+    {
+      "nome": "2ª via boleto de luz CPFL",
+      "url": "https://cpflb2cprd.b2clogin.com/cpflb2cprd.onmicrosoft.com/b2c_1a_signup_signin_mfa_front/oauth2/v2.0/authorize?p=B2C_1A_SIGNUP_SIGNIN_MFA_FRONT&client_id=17d5831d-6741-4670-8085-d1d34e37aec1&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fwww.cpfl.com.br%2Fb2c-auth%2Freceive-token&scope=17d5831d-6741-4670-8085-d1d34e37aec1%20offline_access&response_type=code&prompt=login&response_mode=query",
+      "icone": "lightning-charge"
+    },
+    {
+      "nome": "2ª via boleto do condominio",
+      "url": "https://sccondominios.com/",
+      "icone": "building"
+    },
+    {
+      "nome": "Correios",
+      "url": "https://www.correios.com.br",
+      "icone": "envelope"
+    },
+    {
+      "nome": "2ª via boleto de água Sanasa",
+      "url": "https://www.sanasa.com.br/servicos/fatura-digital/",
+      "icone": "droplet"
+    },
+    {
+      "nome": "Autorização para Prestação de Serviço",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd9Dpy__YVtLXw5YI53VhvSkenUXEaMnPlldlPV5cH1acUTXA/viewform",
+      "icone": "file-earmark-check"
+    },
+    {
+      "nome": "Reuniões Rápidas",
+      "url": "https://meet.google.com/ram-ukgz-jzs",
+      "icone": "camera-video"
+    }
+  ],
+  "regras": [
+    {
+      "categoria": "Horários",
+      "itens": [
+        "Silêncio das 22h às 7h",
+        "Obras até às 18h"
+      ]
+    },
+    {
+      "categoria": "Áreas Comuns",
+      "itens": [
+        "Uso da churrasqueira mediante agendamento (40 reais)",
+        "Uso do salão de festas mediante agendamento (80 reais)",
+        "Manutenção da piscina: 1ª e 3ª quartas-feiras do mês",
+        "Recolher oes escrementos dos sues pets",
+        "Não deixar lixo nas áreas comuns"
+      ]
+    },
+    {
+      "categoria": "Estacionamento",
+      "itens": [
+        "1 vaga por apartamento",
+        "Não estacionar em vagas de visitantes",
+        "Velocidade máxima 10 km/h"
+      ]
+    }
+  ]
+}

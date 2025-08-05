@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description"
+            content="Portal do Condomínio Paraíso Bio - Informações, contatos e serviços para moradores">
+        <meta name="theme-color" content="#2e7d32">
+
+        <title>Paraíso Bio - Portal do Condomínio</title>
+
+        <!-- PWA -->
+        <link rel="manifest" href="manifest.json">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="apple-mobile-web-app-title" content="Paraíso Bio">
+
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+            rel="stylesheet">
+
+        <!-- Google Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+            rel="stylesheet">
+
+        <style>
+        :root {
+            --cor-primaria: #2e7d32;
+            --cor-secundaria: #4caf50;
+            --cor-acento: #81c784;
+            --cor-fundo: #f8f9fa;
+            --espacamento-base: 8px;
+        }
+        
+        * {
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .cabecalho-principal {
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .conteudo-principal {
+            margin-top: calc(var(--espacamento-base) * 2);
+        }
+        
+        .secao-principal {
+            margin-bottom: calc(var(--espacamento-base) * 6);
+            padding: calc(var(--espacamento-base) * 3);
+        }
+        
+        .cartao-personalizado {
+            border: none;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-radius: calc(var(--espacamento-base) * 2);
+        }
+        
+        .cartao-personalizado:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        
+        .cartao-contato {
+            background: white;
+            border-radius: calc(var(--espacamento-base) * 2);
+            padding: calc(var(--espacamento-base) * 2);
+            margin-bottom: calc(var(--espacamento-base) * 2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .cartao-contato:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .cartao-contato-compacto {
+            padding: calc(var(--espacamento-base) * 1.5);
+            margin-bottom: calc(var(--espacamento-base) * 1.5);
+        }
+        
+        .cartao-contato h5 {
+            font-size: 1.1rem;
+            margin-bottom: calc(var(--espacamento-base) * 1);
+        }
+        
+        .cartao-contato p {
+            font-size: 0.9rem;
+            margin-bottom: calc(var(--espacamento-base) * 1);
+        }
+        
+        .btn-grupo {
+            display: flex;
+            gap: calc(var(--espacamento-base) * 1);
+            flex-wrap: wrap;
+        }
+        
+        .btn-grupo .btn {
+            flex: 1;
+            min-width: 90px;
+            font-size: 0.85rem;
+            padding: calc(var(--espacamento-base) * 1) calc(var(--espacamento-base) * 1.5);
+        }
+        
+        .btn-customizado {
+            border-radius: calc(var(--espacamento-base) * 3);
+            padding: calc(var(--espacamento-base) * 1.5) calc(var(--espacamento-base) * 3);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-whatsapp {
+            background-color: #25d366;
+            border-color: #25d366;
+            color: white;
+        }
+        
+        .btn-whatsapp:hover {
+            background-color: #1ebe57;
+            border-color: #1ebe57;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .badge-endereco {
+            font-size: 0.9rem;
+            padding: calc(var(--espacamento-base) * 1.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: calc(var(--espacamento-base) * 1);
+        }
+        
+        .badge-endereco:hover {
+            transform: scale(1.05);
+        }
+        
+        .gif-estacionamento {
+            max-width: 100%;
+            height: auto;
+            border-radius: calc(var(--espacamento-base) * 2);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .mapa-container {
+            border-radius: calc(var(--espacamento-base) * 2);
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .mapa-container iframe {
+            border-radius: calc(var(--espacamento-base) * 2);
+        }
+        
+        .titulo-secao {
+            color: var(--cor-primaria);
+            font-weight: 700;
+            margin-bottom: calc(var(--espacamento-base) * 4);
+            position: relative;
+        }
+        
+        .titulo-secao::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cor-primaria), var(--cor-acento));
+            border-radius: 2px;
+        }
+        
+        .toast-personalizado {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+        }
+        
+        .lista-regras {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .lista-regras li {
+            padding: calc(var(--espacamento-base) * 1) 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: calc(var(--espacamento-base) * 3);
+        }
+        
+        .lista-regras li::before {
+            content: '✓';
+            color: var(--cor-primaria);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .botao-instalacao {
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border: none;
+            color: white;
+            padding: calc(var(--espacamento-base) * 2) calc(var(--espacamento-base) * 4);
+            border-radius: calc(var(--espacamento-base) * 3);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .botao-instalacao:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.3);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .secao-principal {
+                padding: calc(var(--espacamento-base) * 2);
+            }
+            
+            .titulo-secao {
+                font-size: 1.3rem;
+            }
+            
+            .cartao-contato h5 {
+                font-size: 1rem;
+            }
+            
+            .cartao-contato p {
+                font-size: 0.8rem;
+            }
+            
+            .btn-grupo .btn {
+                font-size: 0.75rem;
+                padding: calc(var(--espacamento-base) * 0.8) calc(var(--espacamento-base) * 1.2);
+            }
+            
+            .card-text.lead {
+                font-size: 1rem;
+                line-height: 1.4;
+            }
+            
+            .alert {
+                font-size: 0.85rem;
+                padding: calc(var(--espacamento-base) * 1.5);
+            }
+            
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+            
+            .card-body {
+                padding: calc(var(--espacamento-base) * 2);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    </head>
+
+    <body class="bg-light">
+        <!-- Toast para feedback -->
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="toast-feedback" class="toast" role="alert"
+                aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                    <strong class="me-auto">Sucesso!</strong>
+                    <button type="button" class="btn-close"
+                        data-bs-dismiss="toast"></button>
+                </div>
+                <div class="toast-body">
+                    Endereço copiado para a área de transferência!
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="cabecalho-principal">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container">
+                    <a class="navbar-brand d-flex align-items-center"
+                        href="#home">
+                        <i class="bi bi-buildings me-2"></i>
+                        Paraíso Bio
+                    </a>
+
+                    <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#home">
+                                    <i class="bi bi-house me-1"></i>Home
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#contatos">
+                                    <i
+                                        class="bi bi-person-lines-fill me-1"></i>Contatos
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#enderecos">
+                                    <i class="bi bi-geo-alt me-1"></i>Endereços
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#estacionamento">
+                                    <i
+                                        class="bi bi-car-front me-1"></i>Estacionamento
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#regras">
+                                    <i class="bi bi-list-check me-1"></i>Regras
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#links-uteis">
+                                    <i class="bi bi-link-45deg me-1"></i>Links
+                                    Úteis
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header><!-- cabecalho-principal -->
+
+        <!-- Main Content -->
+        <main class="conteudo-principal">
+            <!-- Seção Home -->
+            <section id="home" class="secao-principal">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="card cartao-personalizado text-center">
+                                <div class="card-body p-5">
+                                    <img src="assets/profile-placeholder.jpg"
+                                        alt="Condomínio Paraíso Bio"
+                                        class="rounded-circle mb-4" width="120"
+                                        height="120" style="object-fit: cover;">
+                                    <h1
+                                        class="card-title titulo-secao">Bem-vindo
+                                        ao Paraíso Bio</h1>
+                                    <p class="card-text lead mb-4">
+                                        Seu portal completo com informações,
+                                        contatos e serviços do condomínio.
+                                        Acesse tudo o que precisa de forma
+                                        rápida e prática.
+                                    </p>
+
+                                    <!-- Instruções PWA -->
+                                    <div
+                                        class="alert alert-info d-flex align-items-center mb-4"
+                                        role="alert">
+                                        <i class="bi bi-info-circle me-2"></i>
+                                        <div>
+                                            <strong>Dica:</strong> Instale este
+                                            app no seu celular para acesso
+                                            offline!
+                                        </div>
+                                    </div>
+
+                                    <button id="botao-instalar"
+                                        class="btn botao-instalacao d-none">
+                                        <i class="bi bi-download me-2"></i>
+                                        Instalar App
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção Contatos -->
+            <section id="contatos" class="secao-principal">
+                <div class="container">
+                    <h2 class="titulo-secao text-center">Contatos</h2>
+
+                    <!-- Grupo WhatsApp de Moradores -->
+                    <div id="grupo-whatsapp" class="row mb-4">
+                        <!-- Grupo será carregado dinamicamente -->
+                    </div>
+
+                    <!-- Contatos Principais -->
+                    <div id="contatos-principais" class="row">
+                        <!-- Contatos principais serão carregados dinamicamente -->
+                    </div>
+
+                    <!-- Botão Ver Mais -->
+                    <div class="text-center mb-4">
+                        <button id="btn-ver-mais"
+                            class="btn btn-outline-primary btn-customizado">
+                            <i class="bi bi-plus-circle me-2"></i>
+                            Ver Mais Contatos
+                        </button>
+                    </div>
+
+                    <!-- Contatos Secundários (ocultos inicialmente) -->
+                    <div id="contatos-secundarios" class="row"
+                        style="display: none;">
+                        <!-- Contatos secundários serão carregados dinamicamente -->
+                    </div>
+                </div>
+            </section> <!-- Seção Endereços -->
+            <section id="enderecos" class="secao-principal">
+                <div class="container">
+                    <h2 class="titulo-secao text-center">Endereços</h2>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card cartao-personalizado h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary">
+                                        <i class="bi bi-building me-2"></i>
+                                        Portaria
+                                    </h5>
+                                    <div id="endereco-condominio">
+                                        <!-- Endereço será carregado dinamicamente -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card cartao-personalizado h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary">
+                                        <i class="bi bi-tools me-2"></i>
+                                        Água e energia
+                                    </h5>
+                                    <div id="endereco-instalacoes">
+                                        <!-- Endereço será carregado dinamicamente -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mapa do Condomínio -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card cartao-personalizado">
+                                <div class="card-body">
+                                    <h5
+                                        class="card-title text-primary text-center mb-4">
+                                        <i class="bi bi-geo-alt me-2"></i>
+                                        GPS
+                                    </h5>
+                                    <div
+                                        class="ratio ratio-16x9 mapa-container">
+                                        <iframe
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.123456789!2d-47.070123456789!3d-22.912345678901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8c8f1234567890%3A0x1234567890abcdef!2sRua%20Vandick%20Reidner%20P.%20Coqueiro%2C%20597%2C%20Campinas%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1691234567890!5m2!1spt-BR!2sbr"
+                                            width="200"
+                                            height="150"
+                                            style="border:0;"
+                                            allowfullscreen
+                                            loading="lazy"
+                                            referrerpolicy="no-referrer-when-downgrade"
+                                            title="Localização do Condomínio Paraíso Bio">
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção Estacionamento -->
+            <section id="estacionamento" class="secao-principal">
+                <div class="container">
+                    <h2 class="titulo-secao text-center">Estacionamento</h2>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="card cartao-personalizado">
+                                <div class="card-body text-center">
+                                    <img src="assets/car.gif"
+                                        alt="Animação do estacionamento"
+                                        class="gif-estacionamento mb-4">
+                                    <h5 class="card-title">Normas de
+                                        Estacionamento</h5>
+                                    <p class="card-text">.
+                                        Respeite as vagas demarcadas e os
+                                        horários estabelecidos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção Regras -->
+            <section id="regras" class="secao-principal">
+                <div class="container">
+                    <h2 class="titulo-secao text-center">Regras do
+                        Condomínio</h2>
+                    <div id="lista-regras" class="row">
+                        <!-- Regras serão carregadas dinamicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção Links Úteis -->
+            <section id="links-uteis" class="secao-principal">
+                <div class="container">
+                    <h2 class="titulo-secao text-center">Links Úteis</h2>
+                    <div id="lista-links" class="row">
+                        <!-- Links serão carregados dinamicamente -->
+                    </div>
+                </div>
+            </section>
+        </main><!-- conteudo-principal -->
+
+        <!-- Modal Formulário -->
+        <div class="modal fade" id="modal-formulario" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="bi bi-envelope me-2"></i>
+                            Reportar Problema
+                        </h5>
+                        <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formulario-contato">
+                            <div class="mb-3">
+                                <label for="nome"
+                                    class="form-label">Nome</label>
+                                <input type="text" class="form-control"
+                                    id="nome" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="apartamento"
+                                    class="form-label">Apartamento</label>
+                                <input type="text" class="form-control"
+                                    id="apartamento" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="categoria"
+                                    class="form-label">Categoria</label>
+                                <select class="form-select" id="categoria"
+                                    required>
+                                    <option value>Selecione...</option>
+                                    <option
+                                        value="estacionamento">Estacionamento</option>
+                                    <option
+                                        value="manutencao">Manutenção</option>
+                                    <option value="limpeza">Limpeza</option>
+                                    <option value="seguranca">Segurança</option>
+                                    <option value="outros">Outros</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="mensagem"
+                                    class="form-label">Descrição do
+                                    Problema</label>
+                                <textarea class="form-control" id="mensagem"
+                                    rows="4" required></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" form="formulario-contato"
+                            class="btn btn-primary">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-light py-4 mt-5">
+            <div class="container text-center">
+                <p class="mb-0">
+                    <i class="bi bi-buildings me-2"></i>
+                    © 2025 | Desenvolvido por Matheus Bonotto - squidev | Todos
+                    os direitos reservados
+                </p>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+        // Variáveis globais
+        let dadosCondominio = null;
+        let deferredPrompt = null;
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarDados();
+            configurarPWA();
+            configurarFormulario();
+            configurarScrollSuave();
+            adicionarAnimacoes();
+        });
+
+        // Carregar dados do JSON
+        async function carregarDados() {
+            try {
+                const resposta = await fetch('assets/data.json');
+                dadosCondominio = await resposta.json();
+                
+                carregarGrupoWhatsApp();
+                carregarContatos();
+                carregarEnderecos();
+                carregarRegras();
+                carregarLinksUteis();
+                configurarBotaoVerMais();
+            } catch (erro) {
+                console.error('Erro ao carregar dados:', erro);
+            }
+        }
+
+        // Carregar grupo do WhatsApp
+        function carregarGrupoWhatsApp() {
+            const containerGrupo = document.getElementById('grupo-whatsapp');
+            
+            if (dadosCondominio.grupos_whatsapp) {
+                dadosCondominio.grupos_whatsapp.forEach(grupo => {
+                    containerGrupo.innerHTML += `
+                        <div class="col-12 mb-3">
+                            <div class="card cartao-personalizado">
+                                <div class="card-body text-center py-3">
+                                    <h6 class="card-title text-success mb-2">
+                                        <i class="bi bi-${grupo.icone} me-2"></i>
+                                        ${grupo.nome}
+                                    </h6>
+                                    <a href="${grupo.url}" target="_blank" class="btn btn-whatsapp btn-customizado">
+                                        <i class="bi bi-whatsapp me-2"></i>Entrar no Grupo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        // Carregar contatos
+        function carregarContatos() {
+            const containerPrincipais = document.getElementById('contatos-principais');
+            const containerSecundarios = document.getElementById('contatos-secundarios');
+            
+            dadosCondominio.contatos.forEach(contato => {
+                const cartaoContato = criarCartaoContato(contato);
+                
+                if (contato.prioridade === 'alta') {
+                    containerPrincipais.innerHTML += cartaoContato;
+                } else {
+                    containerSecundarios.innerHTML += cartaoContato;
+                }
+            });
+        }
+
+        // Criar cartão de contato unificado
+        function criarCartaoContato(contato) {
+            const telefoneNumeros = contato.telefone ? contato.telefone.replace(/\D/g, '') : '';
+            const temTelefone = !!contato.telefone;
+            const temEmail = !!contato.email;
+            
+            let botoesContato = '';
+            
+            if (temTelefone) {
+                botoesContato += `
+                    <a href="tel:${contato.telefone}" class="btn btn-primary btn-customizado">
+                        <i class="bi bi-telephone"></i>
+                        <span class="d-none d-sm-inline ms-1">Ligar</span>
+                    </a>
+                    <a href="https://wa.me/55${telefoneNumeros}" target="_blank" 
+                       class="btn btn-whatsapp btn-customizado">
+                        <i class="bi bi-whatsapp"></i>
+                        <span class="d-none d-sm-inline ms-1">WhatsApp</span>
+                    </a>
+                `;
+            }
+            
+            if (temEmail) {
+                botoesContato += `
+                    <a href="mailto:${contato.email}" class="btn btn-success btn-customizado">
+                        <i class="bi bi-envelope"></i>
+                        <span class="d-none d-sm-inline ms-1">Email</span>
+                    </a>
+                `;
+            }
+            
+            const informacoesContato = `
+                ${temTelefone ? `<p class="text-muted mb-1">${contato.telefone}</p>` : ''}
+                ${temEmail ? `<p class="text-muted mb-1">${contato.email}</p>` : ''}
+            `;
+            
+            return `
+                <div class="col-md-6 mb-3 fade-in">
+                    <div class="cartao-contato cartao-contato-compacto">
+                        <h5 class="text-primary mb-2">
+                            <i class="bi bi-person-circle me-2"></i>
+                            ${contato.nome}
+                        </h5>
+                        ${informacoesContato}
+                        <div class="btn-grupo">
+                            ${botoesContato}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Configurar botão Ver Mais
+        function configurarBotaoVerMais() {
+            const btnVerMais = document.getElementById('btn-ver-mais');
+            const contatosSecundarios = document.getElementById('contatos-secundarios');
+            let mostrandoMais = false;
+            
+            btnVerMais.addEventListener('click', function() {
+                if (mostrandoMais) {
+                    contatosSecundarios.style.display = 'none';
+                    btnVerMais.innerHTML = '<i class="bi bi-plus-circle me-2"></i>Ver Mais Contatos';
+                    mostrandoMais = false;
+                } else {
+                    contatosSecundarios.style.display = 'flex';
+                    btnVerMais.innerHTML = '<i class="bi bi-dash-circle me-2"></i>Ver Menos Contatos';
+                    mostrandoMais = true;
+                }
+            });
+        }
+
+        // Carregar endereços
+        function carregarEnderecos() {
+            const enderecoCondominio = document.getElementById('endereco-condominio');
+            const enderecoInstalacoes = document.getElementById('endereco-instalacoes');
+            
+            const endCondominio = dadosCondominio.enderecos.condominio;
+            const endInstalacoes = dadosCondominio.enderecos.instalacoes;
+            
+            enderecoCondominio.innerHTML = criarBadgeEndereco(endCondominio, 'condominio');
+            enderecoInstalacoes.innerHTML = criarBadgeEndereco(endInstalacoes, 'instalacoes');
+        }
+
+        // Criar badge de endereço copiável
+        function criarBadgeEndereco(endereco, tipo) {
+            const enderecoCompleto = `${endereco.logradouro}, ${endereco.numero} - ${endereco.complemento}, CEP: ${endereco.cep}`;
+            
+            return `
+                <div class="mb-2">
+                    <p class="mb-2">${endereco.logradouro}, ${endereco.numero}</p>
+                    <p class="mb-2">${endereco.complemento}</p>
+                    <span class="badge bg-primary badge-endereco" 
+                          onclick="copiarEndereco('${enderecoCompleto}')"
+                          title="Clique para copiar">
+                        <i class="bi bi-copy me-1"></i>
+                        CEP: ${endereco.cep}
+                    </span>
+                </div>
+            `;
+        }
+
+        // Carregar regras
+        function carregarRegras() {
+            const containerRegras = document.getElementById('lista-regras');
+            
+            dadosCondominio.regras.forEach(categoria => {
+                containerRegras.innerHTML += `
+                    <div class="col-lg-4 mb-4 fade-in">
+                        <div class="card cartao-personalizado h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">
+                                    <i class="bi bi-check-circle me-2"></i>
+                                    ${categoria.categoria}
+                                </h5>
+                                <ul class="lista-regras">
+                                    ${categoria.itens.map(item => `<li>${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Carregar links úteis
+        function carregarLinksUteis() {
+            const containerLinks = document.getElementById('lista-links');
+            
+            dadosCondominio.links_uteis.forEach(link => {
+                containerLinks.innerHTML += `
+                    <div class="col-md-6 col-lg-3 mb-4 fade-in">
+                        <div class="card cartao-personalizado h-100 text-center">
+                            <div class="card-body">
+                                <i class="bi bi-${link.icone} text-primary mb-3" style="font-size: 2.5rem;"></i>
+                                <h6 class="card-title">${link.nome}</h6>
+                                <a href="${link.url}" target="_blank" class="btn btn-outline-primary btn-customizado">
+                                    <i class="bi bi-box-arrow-up-right me-1"></i>
+                                    Acessar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Copiar endereço para área de transferência
+        async function copiarEndereco(endereco) {
+            try {
+                await navigator.clipboard.writeText(endereco);
+                mostrarToast('Endereço copiado para a área de transferência!');
+            } catch (erro) {
+                console.error('Erro ao copiar:', erro);
+                // Fallback para navegadores mais antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = endereco;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                mostrarToast('Endereço copiado para a área de transferência!');
+            }
+        }
+
+        // Copiar email para área de transferência
+        async function copiarEmail(email) {
+            try {
+                await navigator.clipboard.writeText(email);
+                mostrarToast('Email copiado para a área de transferência!');
+            } catch (erro) {
+                console.error('Erro ao copiar:', erro);
+                // Fallback para navegadores mais antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = email;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                mostrarToast('Email copiado para a área de transferência!');
+            }
+        }
+
+        // Mostrar toast de feedback
+        function mostrarToast(mensagem = 'Endereço copiado para a área de transferência!') {
+            const toastElement = document.getElementById('toast-feedback');
+            const toastBody = toastElement.querySelector('.toast-body');
+            toastBody.textContent = mensagem;
+            
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        }
+
+        // Configurar PWA
+        function configurarPWA() {
+            // Service Worker
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => console.log('SW registrado:', registration))
+                    .catch(error => console.error('Erro no SW:', error));
+            }
+
+            // Botão de instalação
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                document.getElementById('botao-instalar').classList.remove('d-none');
+            });
+
+            document.getElementById('botao-instalar').addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log('Resultado da instalação:', outcome);
+                    deferredPrompt = null;
+                    document.getElementById('botao-instalar').classList.add('d-none');
+                }
+            });
+        }
+
+        // Configurar formulário
+        function configurarFormulario() {
+            document.getElementById('formulario-contato').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const dados = Object.fromEntries(formData);
+                
+                console.log('Dados do formulário:', dados);
+                
+                // Aqui você pode enviar os dados para um servidor
+                alert('Formulário enviado com sucesso! Entraremos em contato em breve.');
+                
+                // Fechar modal e limpar formulário
+                bootstrap.Modal.getInstance(document.getElementById('modal-formulario')).hide();
+                this.reset();
+            });
+        }
+
+        // Scroll suave para âncoras
+        function configurarScrollSuave() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Adicionar animações de entrada
+        function adicionarAnimacoes() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // Observar todas as seções
+            document.querySelectorAll('.secao-principal').forEach(section => {
+                observer.observe(section);
+            });
+        }
+    </script>
+    </body>
+</html>
