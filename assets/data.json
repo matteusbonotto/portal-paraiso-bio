@@ -123,6 +123,12 @@
         "Não estacionar em vagas de visitantes",
         "Velocidade máxima 10 km/h"
       ]
+    },
+        {
+      "categoria": "Dicas",
+      "itens": [
+        "As pilhas das fechaduras eletrônicas são do tipo AA alcalina, compre recarregável"
+      ]
     }
   ]
 }
