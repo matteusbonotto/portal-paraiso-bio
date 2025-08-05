@@ -151,7 +151,7 @@ function criarCartaoContato(contato) {
             `;
 
     return `
-                <div class="col-md-6 mb-3 fade-in">
+                <div class="col-md-4 mb-3 fade-in">
                     <div class="cartao-contato cartao-contato-compacto">
                         <h5 class="text-primary mb-2">
                             <i class="bi bi-person-circle me-2"></i>
