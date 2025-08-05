@@ -64,10 +64,56 @@ async function carregarDados() {
 
         carregarGrupoWhatsApp();
         carregarContatos();
+        carregarDelivery();
         carregarEnderecos();
         carregarRegras();
         carregarLinksUteis();
         configurarBotaoVerMais();
+        // Carregar Delivery
+        function carregarDelivery() {
+            const containerDelivery = document.getElementById('lista-delivery');
+            if (!dadosCondominio.Delivery || !containerDelivery) return;
+
+            dadosCondominio.Delivery.forEach(delivery => {
+                const telefoneNumeros = delivery.telefone ? delivery.telefone.replace(/\D/g, '') : '';
+                let botoes = '';
+                if (delivery.telefone) {
+                    botoes += `
+                <a href="tel:${delivery.telefone}" class="btn btn-primary btn-customizado mb-1">
+                    <i class="bi bi-telephone"></i>
+                    <span class="d-none d-sm-inline ms-1">Ligar</span>
+                </a>
+                <a href="https://wa.me/55${telefoneNumeros}" target="_blank" class="btn btn-whatsapp btn-customizado mb-1">
+                    <i class="bi bi-whatsapp"></i>
+                    <span class="d-none d-sm-inline ms-1">WhatsApp</span>
+                </a>
+            `;
+                }
+                if (delivery.menu) {
+                    botoes += `
+                <a href="${delivery.menu}" target="_blank" class="btn btn-outline-secondary btn-customizado mb-1">
+                    <i class="bi bi-card-list"></i>
+                    <span class="d-none d-sm-inline ms-1">Menu</span>
+                </a>
+            `;
+                }
+                containerDelivery.innerHTML += `
+            <div class="col-md-4 mb-3 fade-in">
+                <div class="cartao-contato cartao-contato-compacto">
+                    <h5 class="text-primary mb-2">
+                        <i class="bi bi-bag me-2"></i>
+                        ${delivery.nome}
+                    </h5>
+                    <p class="text-muted mb-1">${delivery.tipo || ''}</p>
+                    <p class="text-muted mb-1">${delivery.telefone || ''}</p>
+                    <div class="btn-grupo">
+                        ${botoes}
+                    </div>
+                </div>
+            </div>
+        `;
+            });
+        }
     } catch (erro) {
         console.error('Erro ao carregar dados:', erro);
     }

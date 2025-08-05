@@ -45,6 +45,42 @@
       "prioridade": "baixa"
     }
   ],
+    "Delivery": [
+    {
+      "nome": "Dê Churros",
+      "telefone": "(19)99336-3839",
+      "tipo": "Sobremesa",
+      "prioridade": "baixa",
+      "menu": "./assets/menu-de-churros.jpg"
+    },
+    {
+      "nome": "Pizzaria Mineira",
+      "telefone": "(19)99336-3839",
+      "tipo": "Pizza",
+      "menu": "https://app.anota.ai/m/RalDvpy9w",
+      "prioridade": "baixa"
+    },
+        {
+      "nome": "Big Pastel",
+      "telefone": "(11)97685-5616",
+      "tipo": "Pastel",
+      "prioridade": "baixa"
+    },
+    {
+      "nome": "Danys Dog",
+      "telefone": "(19)99689-5379",
+      "tipo": "Lanche, dog, porções e pratos executivos",
+      "prioridade": "baixa",
+      "observacao": "Fazemos entrega. Aceitamos Débito/Crédito/Refeição"
+    },
+    {
+      "nome": "Romany pizzaria",
+      "telefone": "(19)3261-5138",
+      "tipo": "Pizza",
+      "prioridade": "baixa",
+      "menu": "https://app.anota.ai/m/gV1PjAxyw"
+    }
+  ],
   "grupos_whatsapp": [
     {
       "nome": "Grupo de Moradores",
@@ -103,15 +139,17 @@
       "categoria": "Horários",
       "itens": [
         "Silêncio das 22h às 7h",
-        "Obras até às 18h"
+        "Obras: segunda a sexta das 8h às 18h",
+        "sábado das 8h às 15h",
+        "domingo e feriado não é permitido."
       ]
     },
     {
       "categoria": "Áreas Comuns",
       "itens": [
-        "Uso da churrasqueira mediante agendamento (70 reais)",
-        "Uso do salão de festas mediante agendamento (100 reais)",
-        "Manutenção da piscina: 1ª e 3ª quartas-feiras do mês",
+        "Uso da churrasqueira mediante agendamento (R$ 40)",
+        "Uso do salão de festas mediante agendamento (R$ 70)",
+        "Manutenção da piscina: 1ª e 3ª quartas-feiras do mês (a confirmar)",
         "Recolher os excrementos dos seus pets",
         "Não deixar lixo nas áreas comuns"
       ]
@@ -120,7 +158,6 @@
       "categoria": "Estacionamento",
       "itens": [
         "1 vaga por apartamento",
-        "Não estacionar em vagas de visitantes",
         "Velocidade máxima 10 km/h"
       ]
     },
