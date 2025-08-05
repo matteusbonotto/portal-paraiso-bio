@@ -221,7 +221,7 @@ function carregarRegras() {
 
     dadosCondominio.regras.forEach(categoria => {
         containerRegras.innerHTML += `
-                    <div class="col-lg-4 mb-4 fade-in">
+                    <div class="col-lg-3 mb-4 fade-in">
                         <div class="card cartao-personalizado h-100">
                             <div class="card-body">
                                 <h5 class="card-title text-primary">
@@ -244,7 +244,7 @@ function carregarLinksUteis() {
 
     dadosCondominio.links_uteis.forEach(link => {
         containerLinks.innerHTML += `
-                    <div class="col-md-6 col-lg-3 mb-4 fade-in">
+                    <div class="col-md-6 col-lg-4 mb-4 fade-in">
                         <div class="card cartao-personalizado h-100 text-center">
                             <div class="card-body">
                                 <i class="bi bi-${link.icone} text-primary mb-3" style="font-size: 2.5rem;"></i>
