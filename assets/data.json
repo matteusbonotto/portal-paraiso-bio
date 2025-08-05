@@ -20,12 +20,6 @@
       "prioridade": "baixa"
     },
     {
-      "nome": "Subsíndica Paty",
-      "telefone": "(19)98812-4347",
-      "tipo": "subsindica",
-      "prioridade": "baixa"
-    },
-    {
       "nome": "Zuma Daniel Cardoso",
       "telefone": "(19)99816-0260",
       "email": "daniel@zuma.eng.br",
@@ -81,7 +75,7 @@
     {
       "nome": "2ª via boleto do condominio",
       "url": "https://sccondominios.com/",
-      "icone": "building"
+      "icone": "buildings"
     },
     {
       "nome": "Correios",
@@ -115,10 +109,10 @@
     {
       "categoria": "Áreas Comuns",
       "itens": [
-        "Uso da churrasqueira mediante agendamento (40 reais)",
-        "Uso do salão de festas mediante agendamento (80 reais)",
+        "Uso da churrasqueira mediante agendamento (70 reais)",
+        "Uso do salão de festas mediante agendamento (100 reais)",
         "Manutenção da piscina: 1ª e 3ª quartas-feiras do mês",
-        "Recolher oes escrementos dos sues pets",
+        "Recolher os excrementos dos seus pets",
         "Não deixar lixo nas áreas comuns"
       ]
     },
