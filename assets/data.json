@@ -21,7 +21,29 @@
       "button-color": "primary",
       "theme-color": "#f0f8ff",
       "ativo": true
-    }
+    },
+    {
+    "titulo": "Atualização Cadastral do Condomínio",
+    "subtitulo": "Formulário para proprietários e inquilinos",
+    "descricao": "Para uma melhor convivência, solicitamos que todos PROPRIETÁRIOS e INQUILINOS, CASAIS PREENCHEREM SOMENTE 1 VEZ. Qualquer dúvida chamar @nathalya ou @~Adriano.",
+    "imagem": "assets/lembrete.jpg",
+    "url": "https://docs.google.com/forms/d/e/1FAIpQLSeW4gC89NuLtB3s_WdF0I5RLG6XL43SXXNRG6-i1bf6EepPRQ/viewform?usp=header",
+    "icone": "assignment",
+    "button-color": "secondary",
+    "theme-color": "#fffaf0",
+    "ativo": true
+  },
+  {
+    "titulo": "Reunião do Condomínio",
+    "subtitulo": "Alinhamento para Assembleia",
+    "descricao": "Reunião quarta-feira dia 13/08/2025 as 20:00 para informações e alinhamento das pautas levado para assembleia e itens faltantes da construtora.",
+    "imagem": "assets/assembleia.jpg",
+    "url": "",
+    "icone": "groups",
+    "button-color": "tertiary",
+    "theme-color": "#f5f5f5",
+    "ativo": true
+}
   ],
   "contatos": [
     {
