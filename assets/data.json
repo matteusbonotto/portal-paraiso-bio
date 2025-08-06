@@ -1,4 +1,28 @@
-{
+  {
+  "divulgacoes": [
+    {
+      "titulo": "Divulgue Aqui!",
+      "subtitulo": "Espaço para seu negócio",
+      "descricao": "Divulgue seu serviço para 188 moradores por apenas R$ 10/mês (taxa simbólica) pelo trabalho comunitário. Inclui foto, descrição e contato. Ajude a manter o site atualizado!",
+      "imagem": "assets/profile-placeholder.jpg",
+      "url": "https://wa.me/5519995910737",
+      "icone": "megaphone",
+      "button-color": "success",
+      "theme-color": "#e8f5e8",
+      "ativo": true
+    },
+    {
+      "titulo": "TV online",
+      "subtitulo": "Todos os canais liberados",
+      "descricao": "Teste agora mesmo é grátis, sem compromisso!",
+      "imagem": "assets/tv-online.jpg",
+      "url": "https://wa.me/5519999820833",
+      "icone": "tv",
+      "button-color": "primary",
+      "theme-color": "#f0f8ff",
+      "ativo": true
+    }
+  ],
   "contatos": [
     {
       "nome": "Portaria",
@@ -45,7 +69,7 @@
       "prioridade": "baixa"
     }
   ],
-    "Delivery": [
+  "Delivery": [
     {
       "nome": "Dê Churros",
       "telefone": "(19)99336-3839",
@@ -161,7 +185,7 @@
         "Velocidade máxima 10 km/h"
       ]
     },
-        {
+    {
       "categoria": "Dicas",
       "itens": [
         "As pilhas das fechaduras eletrônicas são do tipo AA alcalina, compre recarregável"

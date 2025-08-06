@@ -255,6 +255,225 @@
     animation: fadeInUp 0.6s ease-out forwards;
 }
 
+/* Carrossel de Divulgações */
+.carousel-divulgacoes {
+    border-radius: calc(var(--espacamento-base) * 3);
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    margin-bottom: calc(var(--espacamento-base) * 4);
+}
+
+.carousel-divulgacoes .carousel-item {
+    height: 300px;
+    /* Altura fixa */
+}
+
+/* Layout Mobile */
+.mobile-layout {
+    position: relative;
+    height: 100%;
+}
+
+.carousel-image-mobile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.carousel-caption-mobile {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    padding: 30px 20px 20px;
+}
+
+.btn-divulgacao {
+    width: auto;
+    position: relative;
+    margin-left: auto;
+    display: block;
+    border: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-radius: calc(var(--espacamento-base) * 2);
+}
+
+.carousel-caption-mobile .caption-content {
+    text-align: center;
+    color: white;
+}
+
+.carousel-caption-mobile h6 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-caption-mobile .subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    color: #f8f9fa;
+    opacity: 0.9;
+    display: block;
+}
+
+.carousel-caption-mobile p {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    line-height: 1.4;
+}
+
+/* Layout Desktop */
+.desktop-layout {
+    height: 100%;
+    padding: 20px;
+    background: white;
+}
+
+.carousel-card {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background: white;
+    border-radius: calc(var(--espacamento-base) * 2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.image-container {
+    width: 260px;
+    /* Largura fixa para imagem quadrada */
+    height: 260px;
+    flex-shrink: 0;
+    margin: 0;
+    /* margin 0 em todos os lados */
+}
+
+.carousel-image-desktop {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: calc(var(--espacamento-base) * 2);
+    /* Cantos arredondados */
+}
+
+.content-container {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content-container h5 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--cor-primaria);
+}
+
+.content-container .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.content-container p {
+    font-size: 1rem;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    color: #495057;
+}
+
+/* Controles do carrossel */
+.carousel-divulgacoes .carousel-control-prev,
+.carousel-divulgacoes .carousel-control-next {
+    width: 50px;
+    height: 50px;
+    background: rgba(46, 125, 50, 0.8);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.carousel-divulgacoes .carousel-control-prev {
+    left: 20px;
+}
+
+.carousel-divulgacoes .carousel-control-next {
+    right: 20px;
+}
+
+.carousel-divulgacoes .carousel-control-prev:hover,
+.carousel-divulgacoes .carousel-control-next:hover {
+    opacity: 1;
+    background: rgba(46, 125, 50, 0.9);
+}
+
+.carousel-divulgacoes .carousel-control-prev-icon,
+.carousel-divulgacoes .carousel-control-next-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Indicadores */
+.carousel-divulgacoes .carousel-indicators {
+    margin-bottom: 0;
+    bottom: -50px;
+}
+
+.carousel-divulgacoes .carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 6px;
+    background-color: rgba(46, 125, 50, 0.4);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.carousel-divulgacoes .carousel-indicators button.active {
+    background-color: var(--cor-primaria);
+    transform: scale(1.2);
+}
+
+/* Responsivo Mobile */
+@media (max-width: 768px) {
+    .carousel-divulgacoes .carousel-item {
+        height: 300px;
+        /* Mantém altura fixa no mobile também */
+    }
+
+    .carousel-divulgacoes .carousel-control-prev,
+    .carousel-divulgacoes .carousel-control-next {
+        width: 40px;
+        height: 40px;
+    }
+
+    .carousel-divulgacoes .carousel-control-prev {
+        left: 10px;
+    }
+
+    .carousel-divulgacoes .carousel-control-next {
+        right: 10px;
+    }
+
+    .carousel-divulgacoes .carousel-control-prev-icon,
+    .carousel-divulgacoes .carousel-control-next-icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;

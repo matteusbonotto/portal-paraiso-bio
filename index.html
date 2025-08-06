@@ -50,23 +50,7 @@
                     Endereço copiado para a área de transferência!
                 </div>
             </div>
-            <!-- Toast de divulgação -->
-            <div id="toast-divulgacao"
-                class="toast align-items-center text-bg-warning border-0 mt-2"
-                role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="d-flex">
-                    <div class="toast-body">
-                        <i class="bi bi-megaphone me-2"></i>
-                        Quer divulgar seu produto ou serviço aqui?<br>
-                        Por uma taxa simbólica, adiciono seu contato no
-                        portal.<br>
-                        Procure Matheus Bonotto no grupo de moradores!
-                    </div>
-                    <button type="button"
-                        class="btn-close btn-close-white me-2 m-auto"
-                        data-bs-dismiss="toast" aria-label="Fechar"></button>
-                </div>
-            </div>
+
             <!-- Toast de dica de instalação -->
             <div id="toast-dica-pwa"
                 class="toast align-items-center text-bg-info border-0 mt-2"
@@ -104,6 +88,12 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#home">
                                     <i class="bi bi-house me-1"></i>Home
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#divulgacoes">
+                                    <i
+                                        class="bi bi-megaphone me-1"></i>Divulgações
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -172,6 +162,39 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção Divulgações -->
+            <section id="divulgacoes" class="secao-principal">
+                <div class="container">
+                    <h2 class="titulo-secao text-center">Divulgações</h2>
+                    <div id="carousel-divulgacoes"
+                        class="carousel slide carousel-divulgacoes"
+                        data-bs-ride="carousel" data-bs-interval="5000">
+                        <div class="carousel-indicators"
+                            id="carousel-indicators">
+                            <!-- Indicadores serão carregados dinamicamente -->
+                        </div>
+                        <div class="carousel-inner"
+                            id="carousel-divulgacoes-inner">
+                            <!-- Slides serão carregados dinamicamente -->
+                        </div>
+                        <button class="carousel-control-prev" type="button"
+                            data-bs-target="#carousel-divulgacoes"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"
+                                aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button"
+                            data-bs-target="#carousel-divulgacoes"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon"
+                                aria-hidden="true"></span>
+                            <span class="visually-hidden">Próximo</span>
+                        </button>
                     </div>
                 </div>
             </section>

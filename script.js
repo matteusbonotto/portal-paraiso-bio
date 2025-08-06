@@ -73,20 +73,86 @@ async function carregarDados() {
         carregarGrupoWhatsApp();
         carregarContatos();
         carregarDelivery();
+        carregarDivulgacoes();
         carregarEnderecos();
         carregarRegras();
         carregarLinksUteis();
         configurarBotaoVerMais();
-        // Carregar Delivery
-        function carregarDelivery() {
-            const containerDelivery = document.getElementById('lista-delivery');
-            if (!dadosCondominio.Delivery || !containerDelivery) return;
+    } catch (erro) {
+        console.error('Erro ao carregar dados:', erro);
+    }
+}
 
-            dadosCondominio.Delivery.forEach(delivery => {
-                const telefoneNumeros = delivery.telefone ? delivery.telefone.replace(/\D/g, '') : '';
-                let botoes = '';
-                if (delivery.telefone) {
-                    botoes += `
+// Carregar Divulgações (Carrossel)
+function carregarDivulgacoes() {
+    const container = document.getElementById('carousel-divulgacoes-inner');
+    const indicators = document.getElementById('carousel-indicators');
+    if (!container || !dadosCondominio.divulgacoes) return;
+
+    const ativos = dadosCondominio.divulgacoes.filter(d => d.ativo);
+    if (ativos.length === 0) {
+        container.innerHTML = `<div class="carousel-item active"><div class="text-center p-5">Nenhuma divulgação ativa no momento.</div></div>`;
+        return;
+    }
+
+    // Criar indicadores
+    indicators.innerHTML = ativos.map((_, idx) =>
+        `<button type="button" data-bs-target="#carousel-divulgacoes" data-bs-slide-to="${idx}" ${idx === 0 ? 'class="active"' : ''}></button>`
+    ).join('');
+
+    // Criar slides com layout desktop/mobile
+    container.innerHTML = ativos.map((div, idx) => `
+        <div class="carousel-item${idx === 0 ? ' active' : ''}">
+            <!-- Layout Mobile: Imagem com caption sobreposta -->
+            <div class="d-md-none mobile-layout" style="background-color: ${div['theme-color'] || '#ffffff'};">
+                <img src="${div.imagem}" class="d-block w-100 carousel-image-mobile" alt="${div.titulo}">
+                <div class="carousel-caption-mobile">
+                    <div class="caption-content">
+                        <h6>
+                            <i class="bi bi-${div.icone || 'megaphone'} me-2"></i>
+                            ${div.titulo}
+                        </h6>
+                        ${div.subtitulo ? `<small class="subtitle">${div.subtitulo}</small>` : ''}
+                        <p class="small">${div.descricao || ''}</p>
+                        ${div.url ? `<a href="${div.url}" target="_blank" class="btn btn-sm btn-${div['button-color'] || 'primary'} btn-customizado">
+                            <i class="bi bi-box-arrow-up-right me-1"></i>Saiba mais
+                        </a>` : ''}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Layout Desktop: Card com imagem quadrada à esquerda e conteúdo à direita -->
+            <div class="d-none d-md-block desktop-layout">
+                <div class="carousel-card" style="background-color: ${div['theme-color'] || '#ffffff'};">
+                    <div class="image-container">
+                        <img src="${div.imagem}" class="carousel-image-desktop" alt="${div.titulo}">
+                    </div>
+                    <div class="content-container">
+                        <h5>
+                            <i class="bi bi-${div.icone || 'megaphone'} me-2"></i>
+                            ${div.titulo}
+                        </h5>
+                        ${div.subtitulo ? `<p class="subtitle">${div.subtitulo}</p>` : ''}
+                        <p class="m-2">${div.descricao || ''}</p>
+                        ${div.url ? `<a href="${div.url}" target="_blank" class="btn btn-${div['button-color'] || 'primary'} btn-divulgacao mt-2">
+                            <i class="bi bi-box-arrow-up-right me-1"></i>Saiba mais
+                        </a>` : ''}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+// Carregar Delivery
+function carregarDelivery() {
+    const containerDelivery = document.getElementById('lista-delivery');
+    if (!dadosCondominio.Delivery || !containerDelivery) return;
+
+    dadosCondominio.Delivery.forEach(delivery => {
+        const telefoneNumeros = delivery.telefone ? delivery.telefone.replace(/\D/g, '') : '';
+        let botoes = '';
+        if (delivery.telefone) {
+            botoes += `
                 <a href="tel:${delivery.telefone}" class="btn btn-primary btn-customizado mb-1">
                     <i class="bi bi-telephone"></i>
                     <span class="d-none d-sm-inline ms-1">Ligar</span>
@@ -96,16 +162,16 @@ async function carregarDados() {
                     <span class="d-none d-sm-inline ms-1">WhatsApp</span>
                 </a>
             `;
-                }
-                if (delivery.menu) {
-                    botoes += `
+        }
+        if (delivery.menu) {
+            botoes += `
                 <a href="${delivery.menu}" target="_blank" class="btn btn-outline-secondary btn-customizado mb-1">
                     <i class="bi bi-card-list"></i>
                     <span class="d-none d-sm-inline ms-1">Menu</span>
                 </a>
             `;
-                }
-                containerDelivery.innerHTML += `
+        }
+        containerDelivery.innerHTML += `
             <div class="col-md-4 mb-3 fade-in">
                 <div class="cartao-contato cartao-contato-compacto">
                     <h5 class="text-primary mb-2">
@@ -120,11 +186,7 @@ async function carregarDados() {
                 </div>
             </div>
         `;
-            });
-        }
-    } catch (erro) {
-        console.error('Erro ao carregar dados:', erro);
-    }
+    });
 }
 
 // Carregar grupo do WhatsApp
