@@ -1,4 +1,4 @@
-const CACHE_NAME = 'paraisobio-v4';
+const CACHE_NAME = 'paraisobio-v5.1';
 const urlsToCache = [
     './',
     './index.html',

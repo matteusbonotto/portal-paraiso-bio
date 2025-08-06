@@ -29,7 +29,60 @@ document.addEventListener('DOMContentLoaded', function () {
     configurarScrollSuave();
     adicionarAnimacoes();
     configurarPWAInstall();
+
+    // Forçar limpeza de cache na inicialização
+    limparCacheSeNecessario();
 });
+
+// Função para limpar cache quando necessário
+async function limparCacheSeNecessario() {
+    try {
+        // Verificar se precisamos forçar atualização baseado na versão
+        const versaoAtual = '5.1';
+        const versaoArmazenada = localStorage.getItem('versaoApp');
+
+        if (versaoArmazenada !== versaoAtual) {
+            console.log('PWA: Nova versão detectada, limpando cache...');
+            await limparTodoCache();
+            localStorage.setItem('versaoApp', versaoAtual);
+            console.log('PWA: Cache limpo e versão atualizada');
+        }
+    } catch (error) {
+        console.error('PWA: Erro ao verificar/limpar cache:', error);
+    }
+}
+
+// Função para limpar todo o cache
+async function limparTodoCache() {
+    try {
+        // Limpar cache do service worker
+        if ('caches' in window) {
+            const cacheNames = await caches.keys();
+            await Promise.all(
+                cacheNames.map(cacheName => {
+                    console.log('PWA: Removendo cache:', cacheName);
+                    return caches.delete(cacheName);
+                })
+            );
+        }
+
+        // Limpar localStorage (mantendo apenas configurações importantes)
+        const versaoApp = localStorage.getItem('versaoApp');
+        localStorage.clear();
+        if (versaoApp) {
+            localStorage.setItem('versaoApp', versaoApp);
+        }
+
+        // Limpar sessionStorage
+        sessionStorage.clear();
+
+        console.log('PWA: Todo o cache foi limpo');
+        return true;
+    } catch (error) {
+        console.error('PWA: Erro ao limpar cache:', error);
+        return false;
+    }
+}
 
 // Configurar instalação PWA
 function configurarPWAInstall() {
@@ -429,10 +482,30 @@ function configurarPWA() {
         navigator.serviceWorker.register('./service-worker.js')
             .then(registration => {
                 console.log('PWA: Service Worker registrado com sucesso:', registration);
+
                 // Verificar se há atualizações
                 registration.addEventListener('updatefound', () => {
                     console.log('PWA: Nova versão do Service Worker encontrada');
+                    const installingWorker = registration.installing;
+
+                    installingWorker.addEventListener('statechange', () => {
+                        if (installingWorker.state === 'installed') {
+                            if (navigator.serviceWorker.controller) {
+                                // Há uma nova versão disponível
+                                console.log('PWA: Nova versão disponível. Atualizando...');
+                                mostrarToast('Nova versão disponível! Atualizando...');
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 2000);
+                            }
+                        }
+                    });
                 });
+
+                // Forçar verificação de atualizações a cada 30 segundos
+                setInterval(() => {
+                    registration.update();
+                }, 30000);
             })
             .catch(error => {
                 console.error('PWA: Erro ao registrar Service Worker:', error);
@@ -515,4 +588,52 @@ function adicionarAnimacoes() {
     document.querySelectorAll('.secao-principal').forEach(section => {
         observer.observe(section);
     });
+}
+
+// Função especial para desenvolvedores - limpar cache manualmente
+// Para usar: abra o console e digite: limparCacheManual()
+window.limparCacheManual = async function () {
+    try {
+        console.log('PWA: Iniciando limpeza manual de cache...');
+        mostrarToast('Limpando cache... Aguarde...');
+
+        const sucesso = await limparTodoCache();
+
+        if (sucesso) {
+            mostrarToast('Cache limpo com sucesso! Recarregando página...');
+            setTimeout(() => {
+                window.location.reload(true);
+            }, 2000);
+        } else {
+            mostrarToast('Erro ao limpar cache. Tente novamente.');
+        }
+    } catch (error) {
+        console.error('PWA: Erro na limpeza manual:', error);
+        mostrarToast('Erro ao limpar cache.');
+    }
+}
+
+// Função para forçar atualização completa
+window.forcarAtualizacao = async function () {
+    try {
+        console.log('PWA: Forçando atualização completa...');
+        mostrarToast('Forçando atualização completa...');
+
+        // Limpar cache
+        await limparTodoCache();
+
+        // Atualizar service worker
+        if ('serviceWorker' in navigator) {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            for (let registration of registrations) {
+                await registration.unregister();
+            }
+        }
+
+        // Recarregar página
+        window.location.reload(true);
+    } catch (error) {
+        console.error('PWA: Erro ao forçar atualização:', error);
+        mostrarToast('Erro ao forçar atualização.');
+    }
 }
