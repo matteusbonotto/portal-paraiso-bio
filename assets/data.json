@@ -24,6 +24,17 @@
             "ativo": true
         },
         {
+            "titulo": "",
+            "subtitulo": "",
+            "descricao": "",
+            "imagem": "assets/tv-online.mp4",
+            "url": "https://wa.me/5519988740555",
+            "icone": "tv",
+            "button-color": "primary",
+            "theme-color": "#fffaf0",
+            "ativo": true
+        },
+        {
             "titulo": "Atualização Cadastral do Condomínio",
             "subtitulo": "Formulário para proprietários e inquilinos",
             "descricao": "Para uma melhor convivência, solicitamos que todos PROPRIETÁRIOS e INQUILINOS, CASAIS PREENCHEREM SOMENTE 1 VEZ. Qualquer dúvida chamar @nathalya ou @~Adriano.",

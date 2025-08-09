@@ -153,48 +153,85 @@ function carregarDivulgacoes() {
         `<button type="button" data-bs-target="#carousel-divulgacoes" data-bs-slide-to="${idx}" ${idx === 0 ? 'class="active"' : ''}></button>`
     ).join('');
 
-    // Criar slides com layout desktop/mobile
-    container.innerHTML = ativos.map((div, idx) => `
-        <div class="carousel-item${idx === 0 ? ' active' : ''}">
-            <!-- Layout Mobile: Imagem com caption sobreposta -->
-            <div class="d-md-none mobile-layout" style="background-color: ${div['theme-color'] || '#ffffff'};">
-                <img src="${div.imagem}" class="d-block w-100 carousel-image-mobile" alt="${div.titulo}">
-                <div class="carousel-caption-mobile">
-                    <div class="caption-content">
+    // Suporte a vídeo/mp4 e imagem
+    container.innerHTML = ativos.map((div, idx) => {
+        const isVideo = div.imagem && div.imagem.toLowerCase().endsWith('.mp4');
+        // Mobile
+        let mobileMedia;
+        if (isVideo) {
+            mobileMedia = `
+                <div class=\"video-wrapper d-flex justify-content-center align-items-center\" style=\"position:relative;width:100%;height:100%;min-height:180px;\">
+                    <video src=\"${div.imagem}\" class=\"d-block carousel-image-mobile\" style=\"max-width:100%;max-height:220px;\" autoplay loop muted playsinline preload=\"auto\"></video>
+                    <button class=\"btn btn-light btn-sm btn-unmute\" style=\"position:absolute;top:10px;right:10px;z-index:2;\" onclick=\"toggleMute(this)\"><i class=\"bi bi-volume-mute\"></i></button>
+                </div>
+            `;
+        } else {
+            mobileMedia = `<img src=\"${div.imagem}\" class=\"d-block w-100 carousel-image-mobile\" alt=\"${div.titulo}\">`;
+        }
+        // Desktop
+        let desktopMedia;
+        if (isVideo) {
+            desktopMedia = `
+                <div class=\"video-wrapper d-flex justify-content-center align-items-center\" style=\"position:relative;width:100%;height:100%;min-height:220px;\">
+                    <video src=\"${div.imagem}\" class=\"carousel-image-desktop\" style=\"max-width:100%;max-height:220px;\" autoplay loop muted playsinline preload=\"auto\"></video>
+                    <button class=\"btn btn-light btn-sm btn-unmute\" style=\"position:absolute;top:10px;right:10px;z-index:2;\" onclick=\"toggleMute(this)\"><i class=\"bi bi-volume-mute\"></i></button>
+                </div>
+            `;
+        } else {
+            desktopMedia = `<img src=\"${div.imagem}\" class=\"carousel-image-desktop\" alt=\"${div.titulo}\">`;
+        }
+        return `
+        <div class=\"carousel-item${idx === 0 ? ' active' : ''}\">
+            <!-- Layout Mobile: Imagem ou vídeo com caption sobreposta -->
+            <div class=\"d-md-none mobile-layout\" style=\"background-color: ${div['theme-color'] || '#ffffff'};position:relative;\">
+                ${mobileMedia}
+                <div class=\"carousel-caption-mobile\">
+                    <div class=\"caption-content\">
                         <h6>
-                            <i class="bi bi-${div.icone || 'megaphone'} me-2"></i>
+                            <i class=\"bi bi-${div.icone || 'megaphone'} me-2\"></i>
                             ${div.titulo}
                         </h6>
-                        ${div.subtitulo ? `<small class="subtitle">${div.subtitulo}</small>` : ''}
-                        <p class="small">${div.descricao || ''}</p>
-                        ${div.url ? `<a href="${div.url}" target="_blank" class="btn btn-sm btn-${div['button-color'] || 'primary'} btn-customizado">
-                            <i class="bi bi-box-arrow-up-right me-1"></i>Saiba mais
+                        ${div.subtitulo ? `<small class=\"subtitle\">${div.subtitulo}</small>` : ''}
+                        <p class=\"small\">${div.descricao || ''}</p>
+                        ${div.url ? `<a href=\"${div.url}\" target=\"_blank\" class=\"btn btn-sm btn-${div['button-color'] || 'primary'} btn-customizado\">
+                            <i class=\"bi bi-box-arrow-up-right me-1\"></i>Saiba mais
                         </a>` : ''}
                     </div>
                 </div>
             </div>
-            
-            <!-- Layout Desktop: Card com imagem quadrada à esquerda e conteúdo à direita -->
-            <div class="d-none d-md-block desktop-layout">
-                <div class="carousel-card" style="background-color: ${div['theme-color'] || '#ffffff'};">
-                    <div class="image-container">
-                        <img src="${div.imagem}" class="carousel-image-desktop" alt="${div.titulo}">
+            <!-- Layout Desktop: Card com imagem/vídeo quadrada à esquerda e conteúdo à direita -->
+            <div class=\"d-none d-md-block desktop-layout\" style=\"position:relative;\">
+                <div class=\"carousel-card\" style=\"background-color: ${div['theme-color'] || '#ffffff'};\">
+                    <div class=\"image-container\" style=\"position:relative;\">
+                        ${desktopMedia}
                     </div>
-                    <div class="content-container">
+                    <div class=\"content-container\">
                         <h5>
-                            <i class="bi bi-${div.icone || 'megaphone'} me-2"></i>
+                            <i class=\"bi bi-${div.icone || 'megaphone'} me-2\"></i>
                             ${div.titulo}
                         </h5>
-                        ${div.subtitulo ? `<p class="subtitle">${div.subtitulo}</p>` : ''}
-                        <p class="m-2">${div.descricao || ''}</p>
-                        ${div.url ? `<a href="${div.url}" target="_blank" class="btn btn-${div['button-color'] || 'primary'} btn-divulgacao mt-2">
-                            <i class="bi bi-box-arrow-up-right me-1"></i>Saiba mais
+                        ${div.subtitulo ? `<p class=\"subtitle\">${div.subtitulo}</p>` : ''}
+                        <p class=\"m-2\">${div.descricao || ''}</p>
+                        ${div.url ? `<a href=\"${div.url}\" target=\"_blank\" class=\"btn btn-${div['button-color'] || 'primary'} btn-divulgacao mt-2\">
+                            <i class=\"bi bi-box-arrow-up-right me-1\"></i>Saiba mais
                         </a>` : ''}
                     </div>
                 </div>
             </div>
         </div>
-    `).join('');
+        `;
+    }).join('');
+
+    // Função global para toggle mute
+    window.toggleMute = function (btn) {
+        const video = btn.parentElement.querySelector('video');
+        if (video) {
+            video.muted = !video.muted;
+            btn.innerHTML = video.muted
+                ? '<i class="bi bi-volume-mute"></i>'
+                : '<i class="bi bi-volume-up"></i>';
+        }
+    };
 }
 // Carregar Delivery
 function carregarDelivery() {
