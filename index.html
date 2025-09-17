@@ -1,434 +1,546 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description"
-            content="Portal do Condomínio Paraíso Bio - Informações, contatos e serviços para moradores">
-        <meta name="theme-color" content="#2e7d32">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portal do Condomínio Paraíso Bio - Informações, contatos e serviços para moradores"
+    />
+    <meta name="theme-color" content="#2e7d32" />
 
-        <!-- Cache Control -->
-        <meta http-equiv="Cache-Control"
-            content="no-cache, no-store, must-revalidate">
-        <meta http-equiv="Pragma" content="no-cache">
-        <meta http-equiv="Expires" content="0">
+    <!-- Cache Control -->
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
 
-        <title>Paraíso Bio - Portal do Condomínio</title>
+    <title>Paraíso Bio - Portal do Condomínio</title>
 
-        <!-- PWA -->
-        <link rel="manifest" href="manifest.json">
-        <link rel="icon" type="image/png" href="assets/favicon.png">
-        <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="default">
-        <meta name="apple-mobile-web-app-title" content="Paraíso Bio">
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Paraíso Bio" />
 
-        <!-- Bootstrap CSS -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-            rel="stylesheet">
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
-            rel="stylesheet">
-        <!-- CSS customizado deve vir depois do Bootstrap -->
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="style.css?v=5.1">
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- CSS customizado deve vir depois do Bootstrap -->
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css?v=5.1" />
 
-        <!-- Google Fonts -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-            rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-    </head>
-
-    <body class="bg-light">
-
-        <!-- Toast para feedback -->
-        <div class="toast-container position-fixed top-0 end-0 p-3">
-            <div id="toast-feedback" class="toast" role="alert"
-                aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <i class="bi bi-check-circle-fill text-success me-2"></i>
-                    <strong class="me-auto">Sucesso!</strong>
-                    <button type="button" class="btn-close"
-                        data-bs-dismiss="toast"></button>
-                </div>
-                <div class="toast-body">
-                    Endereço copiado para a área de transferência!
-                </div>
-            </div>
-
-            <!-- Toast de dica de instalação -->
-            <div id="toast-dica-pwa"
-                class="toast align-items-center text-bg-info border-0 mt-2"
-                role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="d-flex">
-                    <div class="toast-body">
-                        <i class="bi bi-info-circle me-2"></i>
-                        <strong>Dica:</strong> Instale este app no seu celular
-                        para acesso offline!
-                    </div>
-                    <button type="button"
-                        class="btn-close btn-close-white me-2 m-auto"
-                        data-bs-dismiss="toast" aria-label="Fechar"></button>
-                </div>
-            </div>
+  <body class="bg-light">
+    <!-- Toast para feedback -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div
+        id="toast-feedback"
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header">
+          <i class="bi bi-check-circle-fill text-success me-2"></i>
+          <strong class="me-auto">Sucesso!</strong>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="toast"
+          ></button>
         </div>
-
-        <!-- Header -->
-        <header class="cabecalho-principal">
-            <nav class="navbar navbar-expand-lg navbar-dark">
-                <div class="container">
-                    <a class="navbar-brand d-flex align-items-center"
-                        href="#home">
-                        <i class="bi bi-buildings me-2"></i>
-                        Paraíso Bio
-                    </a>
-
-                    <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#home">
-                                    <i class="bi bi-house me-1"></i>Home
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#divulgacoes">
-                                    <i
-                                        class="bi bi-megaphone me-1"></i>Divulgações
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#contatos">
-                                    <i
-                                        class="bi bi-person-lines-fill me-1"></i>Contatos
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#enderecos">
-                                    <i class="bi bi-geo-alt me-1"></i>Endereços
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#estacionamento">
-                                    <i
-                                        class="bi bi-car-front me-1"></i>Estacionamento
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#regras">
-                                    <i class="bi bi-list-check me-1"></i>Regras
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#links-uteis">
-                                    <i class="bi bi-link-45deg me-1"></i>Links
-                                    Úteis
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header><!-- cabecalho-principal -->
-
-        <!-- Main Content -->
-        <main class="conteudo-principal">
-            <!-- Seção Home -->
-            <section id="home" class="secao-principal">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div>
-                            <div class="card cartao-personalizado text-center">
-                                <div class="card-body p-5">
-                                    <img src="assets/profile-placeholder.jpg"
-                                        alt="Condomínio Paraíso Bio"
-                                        class="rounded-circle mb-4" width="120"
-                                        height="120" style="object-fit: cover;">
-                                    <h1
-                                        class="card-title titulo-secao">Bem-vindo
-                                        ao Paraíso Bio</h1>
-                                    <p class="card-text lead mb-4">
-                                        Seu portal completo com informações,
-                                        contatos e serviços do condomínio.
-                                        Acesse tudo o que precisa de forma
-                                        rápida e prática.
-                                    </p>
-
-                                    <button id="botao-instalar"
-                                        class="btn botao-instalacao d-none text-white">
-                                        <i
-                                            class="bi bi-download me-2"></i>
-                                        Instalar App
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Seção Divulgações -->
-            <section id="divulgacoes" class="secao-principal">
-                <div class="container">
-                    <h2 class="titulo-secao text-center">Divulgações</h2>
-                    <div id="carousel-divulgacoes"
-                        class="carousel slide carousel-divulgacoes"
-                        data-bs-ride="carousel" data-bs-interval="5000">
-                        <div class="carousel-indicators"
-                            id="carousel-indicators">
-                            <!-- Indicadores serão carregados dinamicamente -->
-                        </div>
-                        <div class="carousel-inner"
-                            id="carousel-divulgacoes-inner">
-                            <!-- Slides serão carregados dinamicamente -->
-                        </div>
-                        <button class="carousel-control-prev" type="button"
-                            data-bs-target="#carousel-divulgacoes"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon"
-                                aria-hidden="true"></span>
-                            <span class="visually-hidden">Anterior</span>
-                        </button>
-                        <button class="carousel-control-next" type="button"
-                            data-bs-target="#carousel-divulgacoes"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon"
-                                aria-hidden="true"></span>
-                            <span class="visually-hidden">Próximo</span>
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Seção Contatos -->
-            <section id="contatos" class="secao-principal">
-                <div class="container">
-                    <h2 class="titulo-secao text-center">Contatos</h2>
-
-                    <!-- Grupo WhatsApp de Moradores -->
-                    <div id="grupo-whatsapp" class="row mb-4">
-                        <!-- Grupo será carregado dinamicamente -->
-                    </div>
-
-                    <!-- Contatos Principais -->
-                    <div id="contatos-principais" class="row">
-                        <!-- Contatos principais serão carregados dinamicamente -->
-                    </div>
-
-                    <!-- Botão Ver Mais -->
-                    <div class="text-center mb-4">
-                        <button id="btn-ver-mais"
-                            class="btn btn-outline-primary btn-customizado">
-                            <i class="bi bi-plus-circle me-2"></i>
-                            Ver Mais Contatos
-                        </button>
-                    </div>
-
-                    <!-- Contatos Secundários (ocultos inicialmente) -->
-                    <div id="contatos-secundarios" class="row"
-                        style="display: none;">
-                        <!-- Contatos secundários serão carregados dinamicamente -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- Seção Delivery -->
-            <section id="delivery" class="secao-principal">
-                <div class="container">
-                    <h2 class="titulo-secao text-center">Delivery</h2>
-                    <div id="lista-delivery" class="row">
-                        <!-- Delivery será carregado dinamicamente -->
-                    </div>
-                </div>
-            </section>
-            <section id="enderecos" class="secao-principal">
-                <div class="container">
-                    <h2 class="titulo-secao text-center">Endereços</h2>
-                    <div class="row">
-                        <div class="col-lg-6 mb-4">
-                            <div class="card cartao-personalizado h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title text-primary">
-                                        <i class="bi bi-building me-2"></i>
-                                        Portaria
-                                    </h5>
-                                    <div id="endereco-condominio">
-                                        <!-- Endereço será carregado dinamicamente -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 mb-4">
-                            <div class="card cartao-personalizado h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title text-primary">
-                                        <i class="bi bi-tools me-2"></i>
-                                        Água e energia
-                                    </h5>
-                                    <div id="endereco-instalacoes">
-                                        <!-- Endereço será carregado dinamicamente -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Mapa do Condomínio -->
-                    <div class="row mt-4">
-                        <div class="col-12">
-                            <div class="card cartao-personalizado">
-                                <div class="card-body">
-                                    <h5
-                                        class="card-title text-primary text-center mb-4">
-                                        <i class="bi bi-geo-alt me-2"></i>
-                                        GPS
-                                    </h5>
-                                    <div
-                                        class="ratio ratio-16x9 mapa-container">
-                                        <iframe
-                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.123456789!2d-47.070123456789!3d-22.912345678901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8c8f1234567890%3A0x1234567890abcdef!2sRua%20Vandick%20Reidner%20P.%20Coqueiro%2C%20597%2C%20Campinas%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1691234567890!5m2!1spt-BR!2sbr"
-                                            width="200"
-                                            height="150"
-                                            style="border:0;"
-                                            allowfullscreen
-                                            loading="lazy"
-                                            referrerpolicy="no-referrer-when-downgrade"
-                                            title="Localização do Condomínio Paraíso Bio">
-                                        </iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Seção Estacionamento -->
-            <section id="estacionamento" class="secao-principal">
-                <div class="container">
-                    <h2 class="titulo-secao text-center">Estacionamento</h2>
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="card cartao-personalizado">
-                                <div class="card-body text-center">
-                                    <img src="assets/car.gif"
-                                        alt="Animação do estacionamento"
-                                        class="gif-estacionamento mb-4">
-                                    <h5 class="card-title">Normas de
-                                        Estacionamento</h5>
-                                    <p class="card-text">.
-                                        Respeite as vagas demarcadas e os
-                                        horários estabelecidos.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Seção Regras -->
-            <section id="regras" class="secao-principal">
-                <div class="container">
-                    <h2 class="titulo-secao text-center">Regras do
-                        Condomínio</h2>
-                    <div id="lista-regras" class="row">
-                        <!-- Regras serão carregadas dinamicamente -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- Seção Links Úteis -->
-            <section id="links-uteis" class="secao-principal">
-                <div class="container">
-                    <h2 class="titulo-secao text-center">Links Úteis</h2>
-                    <div id="lista-links" class="row">
-                        <!-- Links serão carregados dinamicamente -->
-                    </div>
-                </div>
-            </section>
-        </main><!-- conteudo-principal -->
-
-        <!-- Modal Formulário -->
-        <div class="modal fade" id="modal-formulario" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">
-                            <i class="bi bi-envelope me-2"></i>
-                            Reportar Problema
-                        </h5>
-                        <button type="button" class="btn-close"
-                            data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="formulario-contato">
-                            <div class="mb-3">
-                                <label for="nome"
-                                    class="form-label">Nome</label>
-                                <input type="text" class="form-control"
-                                    id="nome" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="apartamento"
-                                    class="form-label">Apartamento</label>
-                                <input type="text" class="form-control"
-                                    id="apartamento" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="categoria"
-                                    class="form-label">Categoria</label>
-                                <select class="form-select" id="categoria"
-                                    required>
-                                    <option value>Selecione...</option>
-                                    <option
-                                        value="estacionamento">Estacionamento</option>
-                                    <option
-                                        value="manutencao">Manutenção</option>
-                                    <option value="limpeza">Limpeza</option>
-                                    <option value="seguranca">Segurança</option>
-                                    <option value="outros">Outros</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="mensagem"
-                                    class="form-label">Descrição do
-                                    Problema</label>
-                                <textarea class="form-control" id="mensagem"
-                                    rows="4" required></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                            data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" form="formulario-contato"
-                            class="btn btn-primary">Enviar</button>
-                    </div>
-                </div>
-            </div>
+        <div class="toast-body">
+          Endereço copiado para a área de transferência!
         </div>
+      </div>
 
-        <!-- Footer -->
-        <footer class="bg-dark text-light py-4 mt-5">
-            <div class="container text-center">
-                <p class="mb-0">
-                    <i class="bi bi-buildings me-2"></i>
-                    © 2025 | Desenvolvido por Matheus Bonotto - squidev | Todos
-                    os direitos reservados
-                </p>
+      <!-- Toast de dica de instalação -->
+      <div
+        id="toast-dica-pwa"
+        class="toast align-items-center text-bg-info border-0 mt-2"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <i class="bi bi-info-circle me-2"></i>
+            <strong>Dica:</strong> Instale este app no seu celular para acesso
+            offline!
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Fechar"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="cabecalho-principal">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+          <a class="navbar-brand d-flex align-items-center" href="#home">
+            <i class="bi bi-buildings me-2"></i>
+            Paraíso Bio
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#home">
+                  <i class="bi bi-house me-1"></i>Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#divulgacoes">
+                  <i class="bi bi-megaphone me-1"></i>Divulgações
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contatos">
+                  <i class="bi bi-person-lines-fill me-1"></i>Contatos
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#enderecos">
+                  <i class="bi bi-geo-alt me-1"></i>Endereços
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#estacionamento">
+                  <i class="bi bi-car-front me-1"></i>Estacionamento
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#regras">
+                  <i class="bi bi-list-check me-1"></i>Regras
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#wifi">
+                  <i class="bi bi-wifi me-1"></i>Wi-Fi
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#links-uteis">
+                  <i class="bi bi-link-45deg me-1"></i>Links Úteis
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- cabecalho-principal -->
+
+    <!-- Main Content -->
+    <main class="conteudo-principal">
+      <!-- Seção Home -->
+      <section id="home" class="secao-principal">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div>
+              <div class="card cartao-personalizado text-center">
+                <div class="card-body p-5">
+                  <img
+                    src="assets/profile-placeholder.jpg"
+                    alt="Condomínio Paraíso Bio"
+                    class="rounded-circle mb-4"
+                    width="120"
+                    height="120"
+                    style="object-fit: cover"
+                  />
+                  <h1 class="card-title titulo-secao">
+                    Bem-vindo ao Paraíso Bio
+                  </h1>
+                  <p class="card-text lead mb-4">
+                    Seu portal completo com informações, contatos e serviços do
+                    condomínio. Acesse tudo o que precisa de forma rápida e
+                    prática.
+                  </p>
+
+                  <button
+                    id="botao-instalar"
+                    class="btn botao-instalacao d-none text-white"
+                  >
+                    <i class="bi bi-download me-2"></i>
+                    Instalar App
+                  </button>
+                </div>
+              </div>
             </div>
-        </footer>
+          </div>
+        </div>
+      </section>
 
-        <!-- Bootstrap JS -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="script.js?v=5.1"></script>
-    </body>
+      <!-- Seção Divulgações -->
+      <section id="divulgacoes" class="secao-principal">
+        <div class="container">
+          <h2 class="titulo-secao text-center">Divulgações</h2>
+          <div
+            id="carousel-divulgacoes"
+            class="carousel slide carousel-divulgacoes"
+            data-bs-ride="carousel"
+            data-bs-interval="5000"
+          >
+            <div class="carousel-indicators" id="carousel-indicators">
+              <!-- Indicadores serão carregados dinamicamente -->
+            </div>
+            <div class="carousel-inner" id="carousel-divulgacoes-inner">
+              <!-- Slides serão carregados dinamicamente -->
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carousel-divulgacoes"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carousel-divulgacoes"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Próximo</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Contatos -->
+      <section id="contatos" class="secao-principal">
+        <div class="container">
+          <h2 class="titulo-secao text-center">Contatos</h2>
+
+          <!-- Grupo WhatsApp de Moradores -->
+          <div id="grupo-whatsapp" class="row mb-4">
+            <!-- Grupo será carregado dinamicamente -->
+          </div>
+
+          <!-- Contatos Principais -->
+          <div id="contatos-principais" class="row">
+            <!-- Contatos principais serão carregados dinamicamente -->
+          </div>
+
+          <!-- Botão Ver Mais -->
+          <div class="text-center mb-4">
+            <button
+              id="btn-ver-mais"
+              class="btn btn-outline-primary btn-customizado"
+            >
+              <i class="bi bi-plus-circle me-2"></i>
+              Ver Mais Contatos
+            </button>
+          </div>
+
+          <!-- Contatos Secundários (ocultos inicialmente) -->
+          <div id="contatos-secundarios" class="row" style="display: none">
+            <!-- Contatos secundários serão carregados dinamicamente -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Delivery -->
+      <section id="delivery" class="secao-principal">
+        <div class="container">
+          <h2 class="titulo-secao text-center">Delivery</h2>
+          <div id="lista-delivery" class="row">
+            <!-- Delivery será carregado dinamicamente -->
+          </div>
+        </div>
+      </section>
+      <section id="enderecos" class="secao-principal">
+        <div class="container">
+          <h2 class="titulo-secao text-center">Endereços</h2>
+          <div class="row">
+            <div class="col-lg-6 mb-4">
+              <div class="card cartao-personalizado h-100">
+                <div class="card-body">
+                  <h5 class="card-title text-primary">
+                    <i class="bi bi-building me-2"></i>
+                    Portaria
+                  </h5>
+                  <div id="endereco-condominio">
+                    <!-- Endereço será carregado dinamicamente -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+              <div class="card cartao-personalizado h-100">
+                <div class="card-body">
+                  <h5 class="card-title text-primary">
+                    <i class="bi bi-tools me-2"></i>
+                    Água e energia
+                  </h5>
+                  <div id="endereco-instalacoes">
+                    <!-- Endereço será carregado dinamicamente -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mapa do Condomínio -->
+          <div class="row mt-4">
+            <div class="col-12">
+              <div class="card cartao-personalizado">
+                <div class="card-body">
+                  <h5 class="card-title text-primary text-center mb-4">
+                    <i class="bi bi-geo-alt me-2"></i>
+                    GPS
+                  </h5>
+                  <div class="ratio ratio-16x9 mapa-container">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.123456789!2d-47.070123456789!3d-22.912345678901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8c8f1234567890%3A0x1234567890abcdef!2sRua%20Vandick%20Reidner%20P.%20Coqueiro%2C%20597%2C%20Campinas%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1691234567890!5m2!1spt-BR!2sbr"
+                      width="200"
+                      height="150"
+                      style="border: 0"
+                      allowfullscreen
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"
+                      title="Localização do Condomínio Paraíso Bio"
+                    >
+                    </iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Estacionamento -->
+      <section id="estacionamento" class="secao-principal">
+        <div class="container">
+          <h2 class="titulo-secao text-center">Estacionamento</h2>
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="card cartao-personalizado">
+                <div class="card-body text-center">
+                  <img
+                    src="assets/car.gif"
+                    alt="Animação do estacionamento"
+                    class="gif-estacionamento mb-4"
+                  />
+                  <h5 class="card-title">Normas de Estacionamento</h5>
+                  <p class="card-text">
+                    . Respeite as vagas demarcadas e os horários estabelecidos.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Regras -->
+      <section id="regras" class="secao-principal">
+        <div class="container">
+          <h2 class="titulo-secao text-center">Regras do Condomínio</h2>
+          <div id="lista-regras" class="row">
+            <!-- Regras serão carregadas dinamicamente -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Links Úteis -->
+    <!-- Seção Wifi -->
+    <section id="wifi" class="secao-principal">
+      <div class="container">
+        <h2 class="titulo-secao text-center">Meu Wi-Fi</h2>
+        <div id="wifi-form-container" class="row justify-content-center">
+          <div class="col-md-6">
+            <form id="wifi-form" class="card p-4 shadow-sm">
+              <div class="mb-3">
+                <label for="wifi-ssid" class="form-label">Nome da Rede (SSID)</label>
+                <input type="text" class="form-control" id="wifi-ssid" required maxlength="64" autocomplete="off">
+              </div>
+              <div class="mb-3">
+                <label for="wifi-password" class="form-label">Senha</label>
+                <input type="text" class="form-control" id="wifi-password" required maxlength="64" autocomplete="off">
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Salvar e Gerar QRCode</button>
+            </form>
+          </div>
+        </div>
+        <div id="wifi-qrcode-container" class="row justify-content-center" style="display:none;">
+          <div class="col-md-6 text-center">
+            <div class="card p-4 shadow-sm">
+              <div id="wifi-qrcode"></div>
+              <div class="mt-3">
+                <strong>SSID:</strong> <span id="wifi-ssid-view"></span><br>
+                <strong>Senha:</strong> <span id="wifi-password-view"></span>
+              </div>
+              <button id="wifi-edit-btn" class="btn btn-outline-secondary mt-3"><i class="bi bi-pencil"></i> Editar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+      <section id="links-uteis" class="secao-principal">
+        <div class="container">
+          <h2 class="titulo-secao text-center">Links Úteis</h2>
+          <div id="lista-links" class="row">
+            <!-- Links serão carregados dinamicamente -->
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- conteudo-principal -->
+
+    <!-- Modal Formulário -->
+    <div class="modal fade" id="modal-formulario" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="bi bi-envelope me-2"></i>
+              Reportar Problema
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="formulario-contato">
+              <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" required />
+              </div>
+              <div class="mb-3">
+                <label for="apartamento" class="form-label">Apartamento</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="apartamento"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="categoria" class="form-label">Categoria</label>
+                <select class="form-select" id="categoria" required>
+                  <option value>Selecione...</option>
+                  <option value="estacionamento">Estacionamento</option>
+                  <option value="manutencao">Manutenção</option>
+                  <option value="limpeza">Limpeza</option>
+                  <option value="seguranca">Segurança</option>
+                  <option value="outros">Outros</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="mensagem" class="form-label"
+                  >Descrição do Problema</label
+                >
+                <textarea
+                  class="form-control"
+                  id="mensagem"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              form="formulario-contato"
+              class="btn btn-primary"
+            >
+              Enviar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+      <div class="container text-center">
+        <p class="mb-0">
+          <i class="bi bi-buildings me-2"></i>
+          © 2025 | Desenvolvido por Matheus Bonotto - squidev | Todos os
+          direitos reservados
+        </p>
+      </div>
+    </footer>
+    <button
+      id="refresh-btn"
+      title="Atualizar página e limpar cache"
+      style="
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 9999;
+        width: 54px;
+        height: 54px;
+        padding: 0;
+        background: rgba(25, 118, 210, 0.18);
+        color: #1976d2;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 2px 8px #0002;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+        backdrop-filter: blur(2px);
+      "
+    >
+      <i class="bi bi-arrow-clockwise" style="font-size: 2rem"></i>
+    </button>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script src="script.js?v=5.1"></script>
+  </body>
 </html>

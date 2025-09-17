@@ -4,6 +4,122 @@ let deferredPrompt = null;
 
 // Exibir toast de dica de instalação ao carregar a página
 document.addEventListener('DOMContentLoaded', function () {
+    // --- Wifi QRCode Section ---
+    const wifiForm = document.getElementById('wifi-form');
+    const wifiFormContainer = document.getElementById('wifi-form-container');
+    const wifiQrContainer = document.getElementById('wifi-qrcode-container');
+    const wifiSsidInput = document.getElementById('wifi-ssid');
+    const wifiPasswordInput = document.getElementById('wifi-password');
+    const wifiSsidView = document.getElementById('wifi-ssid-view');
+    const wifiPasswordView = document.getElementById('wifi-password-view');
+    const wifiEditBtn = document.getElementById('wifi-edit-btn');
+    const wifiQrDiv = document.getElementById('wifi-qrcode');
+
+    function showWifiForm() {
+        wifiFormContainer.style.display = '';
+        wifiQrContainer.style.display = 'none';
+    }
+    function showWifiQr(ssid, password) {
+        wifiFormContainer.style.display = 'none';
+        wifiQrContainer.style.display = '';
+        wifiSsidView.textContent = ssid;
+        wifiPasswordView.textContent = password;
+        
+        // Limpar container do QRCode
+        wifiQrDiv.innerHTML = '';
+        
+        // Gera QRCode padrão Wi-Fi usando qrcode-generator
+        const qrString = `WIFI:T:WPA;S:${ssid};P:${password};;`;
+        
+        try {
+            if (typeof qrcode !== 'undefined') {
+                // Usando biblioteca qrcode-generator
+                const qr = qrcode(0, 'M');
+                qr.addData(qrString);
+                qr.make();
+                
+                // Criar elemento canvas
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const moduleCount = qr.getModuleCount();
+                const cellSize = 8;
+                const margin = 16;
+                
+                canvas.width = canvas.height = moduleCount * cellSize + margin * 2;
+                
+                // Fundo branco
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Desenhar QR Code
+                ctx.fillStyle = '#000000';
+                for (let row = 0; row < moduleCount; row++) {
+                    for (let col = 0; col < moduleCount; col++) {
+                        if (qr.isDark(row, col)) {
+                            ctx.fillRect(
+                                col * cellSize + margin,
+                                row * cellSize + margin,
+                                cellSize,
+                                cellSize
+                            );
+                        }
+                    }
+                }
+                
+                wifiQrDiv.appendChild(canvas);
+            } else {
+                // Fallback: criar link para gerador online
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(qrString)}`;
+                const img = document.createElement('img');
+                img.src = qrUrl;
+                img.alt = 'QR Code Wi-Fi';
+                img.style.maxWidth = '220px';
+                img.style.height = 'auto';
+                wifiQrDiv.appendChild(img);
+            }
+        } catch (e) {
+            console.error('Erro ao gerar QRCode:', e);
+            // Fallback final: usar serviço online
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(qrString)}`;
+            const img = document.createElement('img');
+            img.src = qrUrl;
+            img.alt = 'QR Code Wi-Fi';
+            img.style.maxWidth = '220px';
+            img.style.height = 'auto';
+            wifiQrDiv.appendChild(img);
+        }
+    }
+    function saveWifiData(ssid, password) {
+        localStorage.setItem('wifi-ssid', ssid);
+        localStorage.setItem('wifi-password', password);
+    }
+    function loadWifiData() {
+        const ssid = localStorage.getItem('wifi-ssid');
+        const password = localStorage.getItem('wifi-password');
+        return ssid && password ? { ssid, password } : null;
+    }
+    if (wifiForm && wifiQrContainer) {
+        // Ao salvar formulário
+        wifiForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const ssid = wifiSsidInput.value.trim();
+            const password = wifiPasswordInput.value.trim();
+            if (!ssid || !password) return;
+            saveWifiData(ssid, password);
+            showWifiQr(ssid, password);
+        });
+        // Botão editar
+        wifiEditBtn.addEventListener('click', function () {
+            showWifiForm();
+        });
+        // Carregar dados salvos
+        const data = loadWifiData();
+        if (data) {
+            showWifiQr(data.ssid, data.password);
+        } else {
+            showWifiForm();
+        }
+    }
     setTimeout(() => {
         const toastDica = document.getElementById('toast-dica-pwa');
         if (toastDica) {
@@ -32,6 +148,89 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Forçar limpeza de cache na inicialização
     limparCacheSeNecessario();
+
+    // Botão de atualizar página (limpa cache e cookies)
+    const refreshBtn = document.getElementById('refresh-btn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', async function () {
+            // Limpar todos os cookies
+            document.cookie.split(';').forEach(function(c) {
+                const eqPos = c.indexOf('=');
+                const name = eqPos > -1 ? c.substr(0, eqPos) : c;
+                document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+            });
+
+            // Limpar cache do service worker
+            if ('caches' in window) {
+                const cacheNames = await caches.keys();
+                await Promise.all(cacheNames.map(cacheName => caches.delete(cacheName)));
+            }
+
+            // Preservar dados do Wi-Fi antes de limpar
+            const wifiSsid = localStorage.getItem('wifi-ssid');
+            const wifiPassword = localStorage.getItem('wifi-password');
+
+            // Limpar localStorage e sessionStorage
+            localStorage.clear();
+            sessionStorage.clear();
+
+            // Restaurar dados do Wi-Fi
+            if (wifiSsid && wifiPassword) {
+                localStorage.setItem('wifi-ssid', wifiSsid);
+                localStorage.setItem('wifi-password', wifiPassword);
+            }
+
+            // Limpar IndexedDB
+            if (window.indexedDB && indexedDB.databases) {
+                const dbs = await indexedDB.databases();
+                for (const db of dbs) {
+                    try {
+                        await new Promise((resolve, reject) => {
+                            const req = indexedDB.deleteDatabase(db.name);
+                            req.onsuccess = req.onerror = req.onblocked = () => resolve();
+                        });
+                    } catch (e) {}
+                }
+            }
+
+            // Limpar WebSQL
+            if (window.openDatabase) {
+                // Não há API para listar bancos, mas podemos tentar remover nomes comuns
+                const webSqlDbs = ['db', 'database', 'localdb', 'websql'];
+                webSqlDbs.forEach(name => {
+                    try {
+                        const db = openDatabase(name, '1.0', '', 1);
+                        db.transaction(tx => {
+                            tx.executeSql('DROP TABLE IF EXISTS dummy');
+                        });
+                    } catch (e) {}
+                });
+            }
+
+            // Limpar FileSystem API (antiga, suporte limitado)
+            if (window.webkitRequestFileSystem) {
+                window.webkitRequestFileSystem(window.TEMPORARY, 1024, fs => {
+                    fs.root.createReader().readEntries(entries => {
+                        entries.forEach(entry => {
+                            if (entry.isFile) entry.remove(()=>{},()=>{});
+                            if (entry.isDirectory) entry.removeRecursively(()=>{},()=>{});
+                        });
+                    });
+                }, ()=>{});
+            }
+
+            // Desregistrar service workers
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                for (let registration of registrations) {
+                    await registration.unregister();
+                }
+            }
+
+            // Recarregar página forçando reload do servidor
+            window.location.reload(true);
+        });
+    }
 });
 
 // Função para limpar cache quando necessário
@@ -68,9 +267,15 @@ async function limparTodoCache() {
 
         // Limpar localStorage (mantendo apenas configurações importantes)
         const versaoApp = localStorage.getItem('versaoApp');
+        const wifiSsid = localStorage.getItem('wifi-ssid');
+        const wifiPassword = localStorage.getItem('wifi-password');
         localStorage.clear();
         if (versaoApp) {
             localStorage.setItem('versaoApp', versaoApp);
+        }
+        if (wifiSsid && wifiPassword) {
+            localStorage.setItem('wifi-ssid', wifiSsid);
+            localStorage.setItem('wifi-password', wifiPassword);
         }
 
         // Limpar sessionStorage
