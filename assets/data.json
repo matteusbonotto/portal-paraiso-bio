@@ -21,7 +21,7 @@
             "icone": "tv",
             "button-color": "primary",
             "theme-color": "#f0f8ff",
-            "ativo": true
+            "ativo": false
         },
         {
             "titulo": "Assista a Canais Abertos e Fechados SEM ANTENA!",
@@ -32,7 +32,7 @@
             "icone": "tv",
             "button-color": "primary",
             "theme-color": "#fffaf0",
-            "ativo": true
+            "ativo": false
         },
         {
             "titulo": "Atualização Cadastral do Condomínio",
@@ -54,7 +54,7 @@
             "icone": "groups",
             "button-color": "tertiary",
             "theme-color": "#f5f5f5",
-            "ativo": true
+            "ativo": false
         }
     ],
     "contatos": 
@@ -70,6 +70,12 @@
             "telefone": "(19)98289-0000",
             "email": "ricardoimene@gmail.com",
             "tipo": "sindico",
+            "prioridade": "alta"
+        },
+        {
+            "nome": "Edi",
+            "telefone": "(19)99859-8941",
+            "tipo": "Subsíndico",
             "prioridade": "alta"
         },
         {
@@ -224,7 +230,8 @@
                 "Silêncio das 22h às 7h",
                 "Obras: segunda a sexta das 8h às 18h",
                 "sábado das 9h às 15h",
-                "domingo e feriado não é permitido."
+                "domingo e feriado não é permitido.",
+                "Não arrastar moveis, procure levantar, ou comprar protetores de silicone para os pés dos móveis."
             ]
         },
         {
@@ -250,7 +257,8 @@
             "categoria": "Dicas",
             "itens": 
             [
-                "As pilhas das fechaduras eletrônicas são do tipo AA alcalina, compre recarregável"
+                "As pilhas das fechaduras eletrônicas são do tipo AA alcalina, compre recarregável",
+                "Chuveiros são 220v"
             ]
         }
     ]
